@@ -3,8 +3,8 @@ import { EmployeeContext } from '../store';
 import { ThemeContext } from '../../Contexts';
 
 function EmployeeList() {
-    const { addEmployee, employees } = useContext(EmployeeContext);
     const theme = useContext(ThemeContext);
+    const { addEmployee, employees } = useContext(EmployeeContext);
 
     function addEmployeeHandler() {
         const newEmployee = {
