@@ -1,18 +1,7 @@
+import { initialStateFlags } from '../../constants';
+
 const initialState = {
-    employees: [
-        {
-            id: 1,
-            name: "Sammy",
-            location: "DigitalOcean",
-            designation: "Shark"
-        },
-        {
-            id: 2,
-            name: "Vijay",
-            location: "Hashout",
-            designation: "Senior Software Engineer"
-        }
-    ]
+    ...initialStateFlags
 };
 
 export default initialState;

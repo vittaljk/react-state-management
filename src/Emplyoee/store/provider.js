@@ -2,38 +2,62 @@ import React, { useReducer } from 'react';
 import EmployeeContext from './context';
 import initialState from './initialstate';
 import employeeReducer from './reducer';
+import * as ActionTypes from './types';
 
 const EmployeeProvider = ({ children }) => {
     const [state, dispatch] = useReducer(employeeReducer, initialState);
+    const { data: employees, loading, loaded } = state;
 
-    function addEmployee(employee) {
+    function getEmployees() {
         dispatch({
-            type: "ADD_EMPLOYEE",
-            payload: employee
-        });
+            type: ActionTypes.GET_EMPLOYEES
+        })
     }
 
-    function editEmployee(employee) {
+    function getEmployeesSuccess(payload) {
         dispatch({
-            type: "EDIT_EMPLOYEE",
-            payload: employee
-        });
+            type: ActionTypes.GET_EMPLOYEES_SUCCESS,
+            payload
+        })
     }
 
-    function removeEmployee(id) {
+    function getEmployeesError(payload) {
         dispatch({
-            type: "REMOVE_EMPLOYEE",
-            payload: id
-        });
+            type: ActionTypes.GET_EMPLOYEES_ERROR,
+            payload
+        })
     }
+
+    // function addEmployee(employee) {
+    //     dispatch({
+    //         type: "ADD_EMPLOYEE",
+    //         payload: employee
+    //     });
+    // }
+
+    // function editEmployee(employee) {
+    //     dispatch({
+    //         type: "EDIT_EMPLOYEE",
+    //         payload: employee
+    //     });
+    // }
+
+    // function removeEmployee(id) {
+    //     dispatch({
+    //         type: "REMOVE_EMPLOYEE",
+    //         payload: id
+    //     });
+    // }
 
     return (
         <EmployeeContext.Provider
             value={{
-                employees: state.employees,
-                addEmployee,
-                editEmployee,
-                removeEmployee
+                employees,
+                loading,
+                loaded,
+                getEmployees,
+                getEmployeesSuccess,
+                getEmployeesError
             }}
         >
             {children}

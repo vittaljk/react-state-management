@@ -1,7 +1,7 @@
-import EmployeeContext from './context';
 import EmployeeProvider from './provider';
+import useEmployee from './hook';
 
 export {
-    EmployeeContext,
-    EmployeeProvider
+    EmployeeProvider,
+    useEmployee
 }

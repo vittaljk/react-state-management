@@ -1,6 +1,5 @@
 import { createContext } from 'react';
-import initialState from './initialstate';
 
-const EmployeeContext = createContext(initialState);
+const EmployeeContext = createContext();
 
 export default EmployeeContext;

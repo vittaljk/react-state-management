@@ -1,33 +1,31 @@
+import * as ActionTypes from './types';
+
 function employeeReducer(state, action) {
     switch (action.type) {
-        case "ADD_EMPLOYEE":
+        case ActionTypes.GET_EMPLOYEES: {
             return {
                 ...state,
-                employees: [...state.employees, action.payload],
-            };
+                loading: true
+            }
+        }
 
-        case "EDIT_EMPLOYEE":
-            const updatedEmployee = action.payload;
-
-            const updatedEmployees = state.employees.map((employee) => {
-                if (employee.id === updatedEmployee.id) {
-                    return updatedEmployee;
-                }
-                return employee;
-            });
-
+        case ActionTypes.GET_EMPLOYEES_SUCCESS: {
             return {
                 ...state,
-                employees: updatedEmployees,
-            };
+                loading: false,
+                loaded: true,
+                data: action.payload
+            }
+        }
 
-        case "REMOVE_EMPLOYEE":
+        case ActionTypes.GET_EMPLOYEES_ERROR: {
             return {
                 ...state,
-                employees: state.employees.filter(
-                    (employee) => employee.id !== action.payload
-                ),
-            };
+                loading: false,
+                loaded: true,
+                error: action.payload
+            }
+        }
 
         default:
             return state;

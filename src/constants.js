@@ -8,3 +8,10 @@ export const themes = {
         background: "#222222"
     }
 };
+
+export const initialStateFlags = {
+    loading: false,
+    loaded: false,
+    error: {},
+    data: []
+}

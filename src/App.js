@@ -9,7 +9,7 @@ import { Layout } from './Layout';
 function App() {
   return (
     <div className="App">
-      {/* <ThemeContext.Provider value={themes.dark}>
+      <ThemeContext.Provider value={themes.dark}>
         <EmployeeProvider>
           <EmployeeList />
         </EmployeeProvider>
@@ -18,7 +18,7 @@ function App() {
         <UserProvider>
           <UserList />
         </UserProvider>
-      </ThemeContext.Provider> */}
+      </ThemeContext.Provider>
       <Layout />
     </div>
   );

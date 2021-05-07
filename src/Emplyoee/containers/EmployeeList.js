@@ -1,24 +1,43 @@
-import React, { useContext } from 'react'
-import { EmployeeContext } from '../store';
+import React, { useContext, useEffect } from 'react'
+import { useEmployee } from '../store';
 import { ThemeContext } from '../../Contexts';
+import axios from 'axios';
 
 function EmployeeList() {
     const theme = useContext(ThemeContext);
-    const { addEmployee, employees } = useContext(EmployeeContext);
+    // const { addEmployee, employees } = useEmployee();
+    const { employees, getEmployees, getEmployeesSuccess } = useEmployee();
 
-    function addEmployeeHandler() {
-        const newEmployee = {
-            id: employees.length + 1,
-            name: 'vittal',
-            location: 'Bangalore',
-            designation: 'Developer'
+    // function addEmployeeHandler() {
+    //     const newEmployee = {
+    //         id: employees.length + 1,
+    //         name: 'vittal',
+    //         location: 'Bangalore',
+    //         designation: 'Developer'
+    //     }
+    //     addEmployee(newEmployee);
+    // }
+    async function fetchEmployees() {
+        getEmployees();
+        try {
+            const employees = await axios.get(`https://jsonplaceholder.typicode.com/users`)
+            console.log(employees);
+            if (employees?.status === 200 && employees?.data) {
+
+                getEmployeesSuccess(employees.data)
+            }
+        } catch (error) {
+            console.log('error', error);
         }
-        addEmployee(newEmployee);
     }
-    
+
+    useEffect(() => {
+        fetchEmployees();
+    }, []);
+
     return (
         <div style={{ background: theme.background, color: theme.foreground}}>
-            <div onClick={addEmployeeHandler}>Add</div>
+            {/* <div onClick={addEmployeeHandler}>Add</div> */}
             {employees.map(employee => (
                 <div key={employee.id}>
                     {employee.name} - {employee.designation}
