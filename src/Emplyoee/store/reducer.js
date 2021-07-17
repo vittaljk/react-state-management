@@ -30,6 +30,6 @@ function employeeReducer(state, action) {
         default:
             return state;
     }
-};
+}
 
 export default employeeReducer;

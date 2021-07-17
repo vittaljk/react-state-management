@@ -6,7 +6,7 @@ function userReducer(state, action) {
                 users: [...state.users, action.payload],
             };
 
-        case "EDIT_USER":
+        case "EDIT_USER": {
             const updatedUser = action.payload;
 
             const updatedUsers = state.users.map((user) => {
@@ -20,6 +20,7 @@ function userReducer(state, action) {
                 ...state,
                 users: updatedUsers,
             };
+        }
 
         case "REMOVE_USER":
             return {
@@ -32,6 +33,6 @@ function userReducer(state, action) {
         default:
             return state;
     }
-};
+}
 
 export default userReducer;

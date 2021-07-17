@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React, { useContext, useEffect } from 'react'
 import { useEmployee } from '../store';
 import { ThemeContext } from '../../Contexts';
@@ -6,7 +7,7 @@ import axios from 'axios';
 function EmployeeList() {
     const theme = useContext(ThemeContext);
     // const { addEmployee, employees } = useEmployee();
-    const { employees, getEmployees, getEmployeesSuccess } = useEmployee();
+    const { employees, getEmployees, getEmployeesSuccess, getEmployeesError } = useEmployee();
 
     // function addEmployeeHandler() {
     //     const newEmployee = {
@@ -21,13 +22,13 @@ function EmployeeList() {
         getEmployees();
         try {
             const employees = await axios.get(`https://jsonplaceholder.typicode.com/users`)
-            console.log(employees);
+            console.log('employees', employees);
             if (employees?.status === 200 && employees?.data) {
-
                 getEmployeesSuccess(employees.data)
             }
         } catch (error) {
             console.log('error', error);
+            getEmployeesError(error);
         }
     }
 
